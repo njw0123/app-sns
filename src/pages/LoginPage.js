@@ -37,7 +37,6 @@ function LoginPage() {
         xhr.open("POST", REST_SERVER_ADDRESS + "/api/v1/user/validate", false);
         xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded")
         xhr.send("email=" + email + "&password=" + password);
-        window.alert(xhr.status);
         if (xhr.status === 200) {
             // window.alert(xhr.responseText);
             const response = JSON.parse(xhr.responseText);

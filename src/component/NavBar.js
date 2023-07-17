@@ -7,7 +7,6 @@ function NavBar() {
   const navigate = useNavigate();
   const [jwt, setJwt] = useRecoilState(jwtState);
   const [userEmail, setUserEail] = useRecoilState(userEmailState);
-  console.log("loadOnStart...");
 
   if (sessionStorage.getItem("authToken"))
     setJwt(sessionStorage.getItem("authToken"));
@@ -30,10 +29,7 @@ function NavBar() {
         <div className="offcanvas-body">
           <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
             <li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="#">Home</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">Link</a>
+              <Link className="nav-link active" aria-current="page" to="/home">Home</Link>
             </li>
 
             {!jwt && <li className="nav-item">
@@ -42,15 +38,14 @@ function NavBar() {
 
             {jwt && <li className="nav-item dropdown">
               <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Dropdown
+                {userEmail}
               </a>
               <ul className="dropdown-menu">
-                <li><Link className="dropdown-item" to="/settings/deactivate">계정 비활성화</Link></li>
                 <li><Link className="dropdown-item" to="/settings/profile">개인정보 수정</Link></li>
                 <li>
                   <hr className="dropdown-divider" />
                 </li>
-                <li><a className="dropdown-item" href="#">Something else here</a></li>
+                <li><Link className="dropdown-item" to="/settings/deactivate">계정 비활성화</Link></li>
               </ul>
             </li>}
           </ul>

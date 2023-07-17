@@ -27,7 +27,6 @@ function DeactivatePage() {
         } else {
             xhr.send();
         }
-        window.alert(xhr.status);
         if (xhr.status === 200) {
             setJwt(null);
             setUserEmail(null);

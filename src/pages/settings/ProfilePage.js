@@ -49,7 +49,6 @@ function ProfilePage() {
         } else {
             window.alert("정보변경에 실패하였습니다.");
         }
-        // console.log(fileRef.current.files[0]);
     }
     // 이미지 파일 미리보기 스크립트
     const fileChangeHandle = (evt) => {

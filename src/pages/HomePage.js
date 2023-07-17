@@ -32,14 +32,14 @@ function HomePage() {
         evt.preventDefault();
         // 글 등록해주는 API 사용해주고
         const xhr = new XMLHttpRequest();
-        xhr.open("POST", REST_SERVER_ADDRESS+"/api/v1/feed", false);
+        xhr.open("POST", REST_SERVER_ADDRESS+"/api/v1/feed/private", false);
         xhr.setRequestHeader("Authorization", jwt);
         const body = new FormData();
         const description = formRef.current.description.value;
         body.append("description", description);
         
         const attaches = formRef.current.attaches.files;
-        if(attaches.length != 0) {
+        if(attaches.length !== 0) {
             for(var file of attaches) {
                 body.append("attaches", file);
             }
@@ -63,20 +63,17 @@ function HomePage() {
     return (<>
         <NavBar />
         <div className="container mt-5 py-3">
+            <small>로딩이 안될때는 새로고침을 해주세요.</small>
             {jwt &&
                 <form ref={formRef} onSubmit={submitHandle}>
                     <div className="card">
                         <div className="card-body">
                             <div>
                                 <textarea name="description"
-                                    className="form-control-plaintext" style={{ resize: "none" }}></textarea>
-                            </div>
-                            <div className="d-flex flex-wrap">
-                                사진 미리보기 영역
+                                    className="form-control-plaintext" style={{ resize: "none" }} placeholder="글 내용"></textarea>
                             </div>
                             <div>
                                 <input type="file"  name="attaches" accept="image/*" multiple/>
-                                <button className="btn btn-sm btn-secondary"><i className="bi bi-file-image"></i></button>
                             </div>
                         </div>
                     </div>

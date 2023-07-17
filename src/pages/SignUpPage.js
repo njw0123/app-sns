@@ -38,7 +38,6 @@ function SignupPage() {
             verifyBtnRef.current.disabled = true;
             setAvailableFlag(0);
         }
-        // verifyBtnRef.current.disabled = !(/[a-z0-9]+@[a-z]+\.[a-z]{2,3}/.test(evt.target.value));
     }
 
     // 사용자가 이메일 인증코드를 요청시 , 메일을 발송시키는 API를 호출
@@ -64,7 +63,6 @@ function SignupPage() {
             return;
         evt.preventDefault();
         // API로 요청을 하면 됨. 
-        console.log("!!!!!");
         const xhr = new XMLHttpRequest();
         xhr.open("PATCH", REST_SERVER_ADDRESS + "/api/v1/user/verify-email", false);
         xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded")
@@ -112,7 +110,6 @@ function SignupPage() {
         xhr.open("POST", REST_SERVER_ADDRESS + "/api/v1/user/join", false);
         xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded")
         xhr.send("email=" + email + "&name=" + name + "&password=" + password);
-        window.alert(xhr.status);
         if (xhr.status === 201) {
             navigate("/flow/login");
         } else {
@@ -152,8 +149,11 @@ function SignupPage() {
 
                     <div className="mb-3">
                         {availalbeFlag === 2 &&
-                            <input type="text" name="verifycode"
-                                placeholder="이메일 인증번호" onKeyDown={codeSubmitHandle} className="form-control mt-1" />
+                            <>
+                                <input type="text" name="verifycode"
+                                    placeholder="이메일 인증번호" onKeyDown={codeSubmitHandle} className="form-control mt-1" />
+                                <div>인증번호 입력하고 엔터를 눌러주세요</div>
+                            </>
                         }
                         <button type="button" ref={verifyBtnRef}
                             className="form-control btn btn-secondary mt-1"
